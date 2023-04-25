@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Encriptador</title>
+    <!-- Utilizando Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
       body {
         background-color: #f5f5f5;
@@ -16,21 +18,6 @@
         box-shadow: 0px 0px 20px #888888;
         margin: 20px auto;
         max-width: 800px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-      }
-      .left-column {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        flex-grow: 1;
-        margin-right: 40px;
-      }
-      .right-column {
-        display: flex;
-        justify-content: center;
-        align-items: center;
       }
       h1 {
         font-size: 36px;
@@ -66,27 +53,83 @@
         color: #fff;
       }
       img {
-        width: 200px;
+        width: 100%;
+        max-width: 200px;
         margin-top: 40px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div class="left-column">
-        <h1>Encriptador</h1>
-        <textarea id="input-text" placeholder="Ingresa el texto a encriptar"></textarea>
-        <button id="encrypt-button">Encriptar</button>
-        <button id="decrypt-button">Desencriptar</button>
-        <textarea id="output-text" placeholder="Texto encriptado"></textarea>
-        <hr>
-        <textarea id="decrypted-text" placeholder="Texto desencriptado"></textarea>
-        <button id="decrypt-text-button">Desencriptar Texto</button>
+      <h1 class="text-center">Encriptador</h1>
+      <div class="form-group">
+        <label for="input-text">Texto a encriptar:</label>
+        <textarea id="input-text" class="form-control" placeholder="Ingresa el texto a encriptar"></textarea>
       </div>
-      <div class="right-column">
-        <img src="encriptado.png" alt="Imagen de encriptado">
+      <div class="form-group">
+        <button id="encrypt-button" class="btn btn-primary btn-block">Encriptar</button>
       </div>
-    </div>
-    <script src="script.js"></script>
-  </body>
-</html>
+      <div class="form-group">
+        <button id="decrypt-button" class="btn btn-danger btn-block">Desencriptar</button>
+      </div>
+      <div class="form-group">
+        <label for="output-text">Texto encriptado:</label>
+        <textarea id="output-text" class="form-control" placeholder="Texto encriptado"></textarea>
+      </div>
+      <hr>
+      <div class="form-group">
+        <label for="decrypted-text">Texto desencriptado:</label>
+        <textarea id="decrypted-text" class="form-control" placeholder="Texto desencriptado"></textarea>
+      </div>
+      <div class="form-group">
+        <button id="decrypt-text-button" class="btn btn-success btn-block">Desencriptar texto</buttom>
+        </div>
+      </div>
+      <div class="text-center">
+      <img src="encriptado.png" alt="Encriptado">
+      </div>
+      <!-- Utilizando jQuery -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script>
+      // Función para encriptar texto
+      function encryptText(text) {
+      // Reemplazar las letras por las "llaves" de encriptación
+      text = text.replace(/e/g, "enter");
+      text = text.replace(/i/g, "imes");
+      text = text.replace(/a/g, "ai");
+      text = text.replace(/o/g, "ober");
+      text = text.replace(/u/g, "ufat");
+      return text;
+      }
+      // Función para desencriptar texto
+      function decryptText(text) {
+      // Reemplazar las "llaves" de encriptación por las letras
+      text = text.replace(/enter/g, "e");
+      text = text.replace(/imes/g, "i");
+      text = text.replace(/ai/g, "a");
+      text = text.replace(/ober/g, "o");
+      text = text.replace(/ufat/g, "u");
+      return text;
+      }
+      // Encriptar texto al presionar el botón "Encriptar"
+      $("#encrypt-button").click(function() {
+      var inputText = $("#input-text").val().toLowerCase(); // Obtener el texto de entrada y convertirlo a minúsculas
+      var outputText = encryptText(inputText); // Encriptar el texto
+      $("#output-text").val(outputText); // Mostrar el texto encriptado
+      });
+      // Desencriptar texto al presionar el botón "Desencriptar"
+      $("#decrypt-button").click(function() {
+      var inputText = $("#output-text").val().toLowerCase(); // Obtener el texto encriptado y convertirlo a minúsculas
+      var outputText = decryptText(inputText); // Desencriptar el texto
+      $("#output-text").val(outputText); // Mostrar el texto desencriptado
+      });
+      // Desencriptar texto al presionar el botón "Desencriptar texto"
+      $("#decrypt-text-button").click(function() {
+      var inputText = $("#decrypted-text").val().toLowerCase(); // Obtener el texto de entrada y convertirlo a minúsculas
+      var outputText = decryptText(inputText); // Desencriptar el texto
+      $("#decrypted-text").val(outputText); // Mostrar el texto desencriptado
+      });
+      </script>
+      
+        </body>
+      </html>   
